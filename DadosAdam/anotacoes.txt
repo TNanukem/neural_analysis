@@ -3,9 +3,11 @@ Dados: Duas tabelas com 5 minutos de sinais a 512 Hz, totalizando 307200 pontos 
 Problema: Temos dados de eletrodos de uma pessoa. O problema e que nesses dados temos interferencias de piscadas, batimentos cardiacos e outros artefatos. Vamos identificar esses artefatos para facilitar o processamento dos dados originais.
 	Esses artefatos tem um perfil teorico.
 
-Preprocessamento: retirar canais 1, 4, 5, 9, 12, 13 e 16;
+Preprocessamento: Retirar canais (1, 4, 5, 9, 12, 13 e 16) que nao sao relevantes para os artefatos que buscamos identificar;
+		  Uso de filtros e FFTs
 
-Extracao de padroes: vamos testar diferentes algoritmos, mas provavelmente sera usada a analise de componentes principais (ACP) ou principal component analysis (PCA).
+Extracao de padroes: Vamos testar diferentes algoritmos, mas provavelmente sera usada a analise de componentes principais (ACP) ou principal component analysis (PCA) seguida de alguma rede neural ou algum outro algoritmo de classificacao.
+		     O uso do PCA ou algum outro algoritmo e necessario para que os ecos de um mesmo sinal nervoso sejam identificados com uma unica variavel ou um conjunto menor de variaveis que seja mais representativo do problema.
 
 Avaliacao dos resultados: Os artefatos identificados pelo algoritmo serao comparados ao perfil teorico esperado para aqueles sinais.
 
