@@ -12,14 +12,13 @@ L = height(raw_data);
 Fs = 512;
 T = 1/Fs;
 
-clear raw_data;
 
 %% Display signals
 
 signalPlot( channels, t, 'time (s)', 'channel signal', 'Time domain');
 
 %% FFT analysis
-fft_channels = fft(channels);
+fft_channels = fft(a);
 P2 = abs(fft_channels/L);
 P1 = P2(1:L/2+1, :);
 P1(2:end-1, :) = 2*P1(2:end-1, :);
@@ -31,7 +30,7 @@ signalPlot(P1, f, 'f (Hz)', '|P1(f)|', 'Frequency Domain');
 %% Filter Design
 
 n = 2000;
-Wn = [4 7]*2/Fs;
+Wn = [0.4 6]*2/Fs;
 ffir = fir1(n, Wn, 'bandpass');
 figure;
 freqz(ffir,1,1024)
@@ -39,7 +38,7 @@ freqz(ffir,1,1024)
 fdelay = mean(grpdelay(ffir));
 
 %% Filter Data
-filtered_signal = filter(ffir, 1, channels);
+filtered_signal = filter(ffir, 1, a);
 t_filt = t(1:end-fdelay);
 fsignal = filtered_signal(fdelay+1:end, :);
 
